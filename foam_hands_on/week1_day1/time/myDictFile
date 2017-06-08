@@ -1,0 +1,31 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  3.0.x                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     3.0;
+    format      ascii;
+    class       dictionary;
+    object      myDictFile;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+subDict
+{
+    example   banana;
+}
+
+scalar_in  dimless [0 0 0 0 0 0 0] -8E-3;
+
+vec_in   (1 4 5E-3);
+
+myList 3
+(
+( -55 0.0 0.0 )
+( 1.0 0.0 0.0 )
+( 0.0 1.0 0.0 )
+);

@@ -1,0 +1,8 @@
+FoamFile
+{
+version 3.0;
+format ascii;
+class dictionary;
+location "system";
+object fvSolution;
+}

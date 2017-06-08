@@ -1,0 +1,144 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  3.0.x                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     pimpleFoam;
+
+startFrom       latestTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         20;
+
+deltaT          1e-4;
+
+writeControl    runTime;
+
+writeInterval   5;
+
+purgeWrite      2;
+
+writeFormat     ascii;
+
+writePrecision  8;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable true;
+
+adjustTimeStep  yes;
+
+maxCo           1;
+
+maxDeltaT       0.001;
+
+// ************************************************************************* //
+
+///////////////////////////////////////////////////////////////////////////
+functions
+(
+
+domainminandmax
+{
+    type fieldMinMax;
+
+    functionObjectLibs ("libfieldFunctionObjects.so");
+
+    enabled true;
+
+    mode component;
+
+    outputControl timeStep;
+    outputInterval 1;
+
+    log true;
+
+    fields (p U k omega nut);
+}
+///////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+forces_object
+{
+    type forces;
+    functionObjectLibs ("libforces.so");
+
+    enabled true;
+
+    //outputControl outputTime;
+    outputControl   timeStep;
+    outputInterval  1;
+
+    patches ("square");
+
+    pName p;
+    Uname U;
+
+    ////Density only for incompressible flows
+    rhoName rhoInf;
+    rhoInf 1000;
+
+    ////Centre of rotation
+    CofR (0 0 0);
+}
+///////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+probes1
+{
+    type probes;
+    functionObjectLibs ("libsampling.so");
+    //dictionary probesDict;
+    probeLocations
+    (
+	(0.025 0 0)
+	(0.05 0 0)
+	(0.075 0 0)
+	(0.1 0 0)
+	(0.15 0 0)
+	(0.3 0 0)
+	(0.5 0 0)
+    );
+    fields
+    (p U);
+
+    outputControl       timeStep;
+    outputInterval      1;
+}
+///////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+yplus
+{
+    type                yPlus;
+    functionObjectLibs  ("libutilityFunctionObjects.so");
+
+    enabled true;
+
+    outputControl outputTime;
+    //outputControl timeStep;
+    //outputInterval 1;
+
+    //log true;
+}
+///////////////////////////////////////////////////////////////////////////
+
+);
