@@ -1,0 +1,13 @@
+FoamFile
+{
+version 3.0;
+format ascii;
+class dictionary;
+location "system";
+object fvSchemes;
+}
+
+
+gradSchemes { default Gauss linear corrected;}
+divSchemes { default none; }
+laplacianSchemes { default Gauss linear corrected;}

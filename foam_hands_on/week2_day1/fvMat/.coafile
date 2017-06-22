@@ -1,0 +1,9 @@
+[default]
+bears = coalaBear, LineCountBear, FilenameBear, InvalidLinkBear
+files = *.cpp, *.C, *.H, *.hpp
+max_lines_per_file = 100000
+
+[c++]
+bears = CPPCleanBear, CPPCheckBear, ClangComplexityBear, GNUIndentBear, CPDBear
+files = *.cpp, *.C, *.H, *.hpp
+language = c++
